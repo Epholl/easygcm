@@ -108,7 +108,7 @@ public class GcmRegistrationService extends IntentService {
     }
 
     private boolean isAlreadyRegistered(Context context) {
-        return GcmHelper.hasRegistrationId(context);
+        return GcmHelper.isRegistered(context);
     }
 
     private void releaseWakeLock() {
