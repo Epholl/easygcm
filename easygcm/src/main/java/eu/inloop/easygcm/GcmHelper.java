@@ -99,7 +99,7 @@ public final class GcmHelper {
      * @return registration ID, or empty string if there is no existing
      * registration ID.
      */
-    private static String getRegistrationId(Context context) {
+    public static String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGcmPreferences(context);
         final String registrationId = prefs.getString(PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
@@ -120,6 +120,18 @@ public final class GcmHelper {
             return "";
         }
         return registrationId;
+    }
+
+    /**
+     * Removes the current registration id effectively forcing the app to register again.
+     * @param context application's context.
+     */
+    public static void removeRegistrationId(Context context) {
+        final SharedPreferences prefs = getGcmPreferences(context);
+        prefs.edit()
+                .remove(PROPERTY_REG_ID)
+                .remove(PROPERTY_APP_VERSION)
+                .apply();
     }
 
     /**
